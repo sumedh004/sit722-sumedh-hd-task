@@ -1,0 +1,25 @@
+version: '3'
+services:
+  book_catalog:
+    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/book_catalog:$VERSION
+    build: 
+      context: ./book_catalog
+      dockerfile: Dockerfile
+    container_name: book_catalog
+    ports:
+     - "4001:5000"
+    environment:
+      - DATABASE_URL=postgresql://sumedh_2yjy_user:sKNfD5YiNVMR9KSPGvOxxR5nhF3KLuZI@dpg-cs37mdbv2p9s738ufd8g-a.oregon-postgres.render.com/sumedh_2yjy
+    restart: "no"
+
+  inventory_management:
+    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/inventory_management:$VERSION
+    build: 
+      context: ./inventory_management
+      dockerfile: Dockerfile
+    container_name: inventory_management
+    ports:
+     - "4002:5001"
+    environment:
+      - DATABASE_URL=postgresql://sumedh_2yjy_user:sKNfD5YiNVMR9KSPGvOxxR5nhF3KLuZI@dpg-cs37mdbv2p9s738ufd8g-a.oregon-postgres.render.com/sumedh_2yjy
+    restart: "no"
