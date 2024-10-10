@@ -4,9 +4,11 @@ phases:
   install:
     runtime-versions:
       python: 3.x
-      terraform: 1.5.6
     commands:
       - echo Setting up Terraform environment...
+      - sudo yum install -y yum-utils shadow-utils
+      - sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+      - sudo yum -y install terraform
   pre_build:
     commands:
       - cd scripts/terraform
