@@ -14,10 +14,12 @@ provider "aws" {
 # Create ECR repositories for the microservices
 resource "aws_ecr_repository" "book_catalog" {
   name = "book_catalog"
+  force_delete = "true"
 }
 
 resource "aws_ecr_repository" "inventory_management" {
   name = "inventory_management"
+  force_delete = "true"
 }
 
 # EKS Cluster Role
@@ -89,6 +91,11 @@ resource "aws_eks_cluster" "my_cluster" {
 
   upgrade_policy {
     support_type = "STANDARD"
+  }
+
+    timeouts {
+    delete = "30m"
+
   }
 }
 

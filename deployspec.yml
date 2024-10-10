@@ -16,5 +16,5 @@ phases:
       - echo Deploying to Kubernetes...
       - chmod +x ./scripts/deploy.sh
       - ./scripts/deploy.sh
-      - kubectl apply -f scripts/kubernetes/deploy.yaml
+ 
  
