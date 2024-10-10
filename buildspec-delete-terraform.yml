@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+    commands:
+      - echo Setting up Terraform environment...
+      - sudo yum install -y yum-utils shadow-utils
+      - sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+      - sudo yum -y install terraform
+  pre_build:
+    commands:
+      - cd scripts/terraform
+      - terraform init
+  build:
+    commands:
+      - terraform destroy -auto-approve
+  post_build:
+    commands:
+      - echo Terraform destroy completed successfully.
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: yes
