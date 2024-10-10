@@ -1,4 +1,4 @@
-FROM python:slim-buster
+FROM public.ecr.aws/docker/library/python:slim-buster
 
 WORKDIR /app
 
