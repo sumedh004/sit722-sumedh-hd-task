@@ -1,0 +1,30 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "us-east-1"
+    REPO_URI_BOOK: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/book_catalog"
+    REPO_URI_INVENTORY: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/inventory_management"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $(aws ssm get-parameter --name "/ecr/book_catalog_repo_url" --query "Parameter.Value" --output text)
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $(aws ssm get-parameter --name "/ecr/inventory_management_repo_url" --query "Parameter.Value" --output text)
+
+  build:
+    commands:
+      - echo Building the Docker images...
+      - docker build -t book_catalog ./book_catalog
+      - docker build -t inventory_management ./inventory_management
+      - docker tag book_catalog:latest $REPO_URI_BOOK:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag inventory_management:latest $REPO_URI_INVENTORY:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands:
+      - echo Pushing the Docker images to Amazon ECR...
+      - docker push $REPO_URI_BOOK:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $REPO_URI_INVENTORY:$CODEBUILD_RESOLVED_SOURCE_VERSION
+artifacts:
+  files:
+    - '**/*'

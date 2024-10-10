@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$CONTAINER_REGISTRY" ]; then
-  echo "Error: VERSION is not set."
+  echo "Error: CONTAINER_REGISTRY is not set."
   exit 1
 fi
 
@@ -10,5 +10,6 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-docker push $CONTAINER_REGISTRY.azurecr.io/book_catalog:$VERSION
-docker push $CONTAINER_REGISTRY.azurecr.io/inventory_management:$VERSION
+# Replace with AWS ECR URLs
+docker push $CONTAINER_REGISTRY.dkr.ecr.$AWS_REGION.amazonaws.com/book_catalog:$VERSION
+docker push $CONTAINER_REGISTRY.dkr.ecr.$AWS_REGION.amazonaws.com/inventory_management:$VERSION

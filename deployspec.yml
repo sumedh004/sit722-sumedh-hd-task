@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.4/2024-09-11/bin/linux/amd64/kubectl
+
+      - chmod +x ./kubectl
+      - mv ./kubectl /usr/local/bin/
+      - aws eks update-kubeconfig --region $AWS_REGION --name your-cluster-name
+  pre_build:
+    commands:
+      - echo Preparing to deploy to EKS...
+  build:
+    commands:
+      - echo Deploying to Kubernetes...
+      - kubectl apply -f scripts/kubernetes/deploy.yaml
+      - kubectl set image deployment/book-catalog-deployment book-catalog=$REPO_URI_BOOK:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - kubectl set image deployment/inventory-management-deployment inventory-management=$REPO_URI_INVENTORY:$CODEBUILD_RESOLVED_SOURCE_VERSION

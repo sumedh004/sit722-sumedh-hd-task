@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+      terraform: 1.5.6
+    commands:
+      - echo Setting up Terraform environment...
+  pre_build:
+    commands:
+      - cd scripts/terraform
+      - terraform init
+  build:
+    commands:
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo Terraform apply completed successfully.
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: yes
