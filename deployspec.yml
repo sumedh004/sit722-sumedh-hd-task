@@ -7,7 +7,7 @@ phases:
 
       - chmod +x ./kubectl
       - mv ./kubectl /usr/local/bin/
-      - aws eks update-kubeconfig --region $AWS_REGION --name your-cluster-name
+      - aws eks update-kubeconfig --region $AWS_REGION --name my-cluster
   pre_build:
     commands:
       - echo Preparing to deploy to EKS...
