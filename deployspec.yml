@@ -16,5 +16,7 @@ phases:
       - echo Deploying to Kubernetes...
       - chmod +x ./scripts/deploy.sh
       - ./scripts/deploy.sh
+      - sleep 60
+      - kubectl get all
  
  
