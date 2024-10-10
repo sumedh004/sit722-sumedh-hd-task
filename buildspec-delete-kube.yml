@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.4/2024-09-11/bin/linux/amd64/kubectl
+
+      - chmod +x ./kubectl
+      - mv ./kubectl /usr/local/bin/
+      - aws eks update-kubeconfig --region $AWS_REGION --name my-cluster
+  pre_build:
+    commands:
+      - echo Preparing to delete EKS deployment...
+  build:
+    commands:
+      - echo deleteting Kubernetes deployment...
+      - chmod +x ./scripts/delete.sh
+      - ./scripts/delete.sh
+      - sleep 60
+      - kubectl get all
+ 
+ 

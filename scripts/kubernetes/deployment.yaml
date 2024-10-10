@@ -21,7 +21,7 @@ spec:
         - containerPort: 5000
         env:
         - name: DATABASE_URL
-          value: postgresql://sumedhpart5_user:4YSRqUaWffzs1Wz5NO2zthypKg6zrwwW@dpg-crfatsbgbbvc73c1kbo0-a.oregon-postgres.render.com/sumedhpart5
+          value: postgresql://sumedh_2yjy_user:sKNfD5YiNVMR9KSPGvOxxR5nhF3KLuZI@dpg-cs37mdbv2p9s738ufd8g-a.oregon-postgres.render.com/sumedh_2yjy
 
 
 ---
@@ -67,7 +67,7 @@ spec:
         - containerPort: 5001
         env:
         - name: DATABASE_URL
-          value: postgresql://sumedhpart5_user:4YSRqUaWffzs1Wz5NO2zthypKg6zrwwW@dpg-crfatsbgbbvc73c1kbo0-a.oregon-postgres.render.com/sumedhpart5
+          value: postgresql://sumedh_2yjy_user:sKNfD5YiNVMR9KSPGvOxxR5nhF3KLuZI@dpg-cs37mdbv2p9s738ufd8g-a.oregon-postgres.render.com/sumedh_2yjy
 
 
 ---

@@ -3,4 +3,4 @@
 
 
 
-envsubst < ./scripts/kubernetes/deployment.yaml | kubectl delete -f -
+kubectl delete -f ./scripts/kubernetes/deployment.yaml
