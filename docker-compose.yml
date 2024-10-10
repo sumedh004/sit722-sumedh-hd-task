@@ -1,7 +1,7 @@
 version: '3'
 services:
   book_catalog:
-    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/book_catalog/book_catalog:latest
+    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/book_catalog:latest
     build: 
       context: ./book_catalog
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
     restart: "no"
 
   inventory_management:
-    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/inventory_management/inventory_management:latest
+    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/inventory_management:latest
     build: 
       context: ./inventory_management
       dockerfile: Dockerfile
