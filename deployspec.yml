@@ -14,6 +14,7 @@ phases:
   build:
     commands:
       - echo Deploying to Kubernetes...
+      - chmod +x ./scripts/deploy.sh
+      - ./scripts/deploy.sh
       - kubectl apply -f scripts/kubernetes/deploy.yaml
-      - kubectl set image deployment/book-catalog-deployment book-catalog=$REPO_URI_BOOK:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - kubectl set image deployment/inventory-management-deployment inventory-management=$REPO_URI_INVENTORY:$CODEBUILD_RESOLVED_SOURCE_VERSION
+ 

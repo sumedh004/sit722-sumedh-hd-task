@@ -1,29 +1,21 @@
 version: 0.2
 
-env:
-  variables:
-    AWS_REGION: "us-east-1"
-    REPO_URI_BOOK: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/book_catalog"
-    REPO_URI_INVENTORY: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/inventory_management"
-    VERSION: "latest"  # Set your version here or pass it as an environment variable
 
 phases:
   pre_build:
     commands:
-      - echo "AWS_ACCOUNT_ID $AWS_ACCOUNT_ID"
-      - echo "AWS_REGION $AWS_REGION"
-      - echo "REPO_URI_BOOK $REPO_URI_BOOK"
-      - echo "REPO_URI_INVENTORY $REPO_URI_INVENTORY"
+
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPO_URI_BOOK
-      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPO_URI_INVENTORY
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 273354648888.dkr.ecr.us-east-1.amazonaws.com/book_catalog
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 273354648888.dkr.ecr.us-east-1.amazonaws.com/inventory_management
 
   build:
     commands:
       - echo Building Docker images using Docker Compose...
-      - chmod +x ./push-image.sh  # Ensure the script is executable
-      - ./buildimage.sh  # This script will build the images using Docker Compose
-      - ./push-image.sh  # This script will push the images to ECR
+      - chmod +x ./scripts/build-image.sh  # Ensure the script is executable
+      - chmod +x ./scripts/push-image.sh
+      - ./scripts/build-image.sh  # This script will build the images using Docker Compose
+      - ./scripts/push-image.sh  # This script will push the images to ECR
 
   post_build:
     commands:

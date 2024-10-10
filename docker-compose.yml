@@ -1,7 +1,7 @@
 version: '3'
 services:
   book_catalog:
-    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/book_catalog:$VERSION
+    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/book_catalog/book_catalog:$VERSION
     build: 
       context: ./book_catalog
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
     restart: "no"
 
   inventory_management:
-    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/inventory_management:$VERSION
+    image: 273354648888.dkr.ecr.us-east-1.amazonaws.com/inventory_management/inventory_management:$VERSION
     build: 
       context: ./inventory_management
       dockerfile: Dockerfile
